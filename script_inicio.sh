@@ -35,6 +35,11 @@ while true; do
     echo "Cambiando permisos de fichero a 740"
     chmod -R 740 /etc/letsencrypt
     
+    # Por si alguien utilizaba la imagen anterior, se mantiene que funcione con SLEEP
+    if [ -n "$SLEEP" ]; then
+        DORMIR=$SLEEP
+    fi
+    
     # Si existe la variable DORMIR, se espera es tiempo, y sino se sale
     if [ -n "$DORMIR" ]; then
         # Tiempo a dormir
