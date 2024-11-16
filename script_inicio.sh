@@ -10,7 +10,7 @@ salir_bien() {
 }
 
 # Si se reciben las señales 
-# Si se recibe SIGTERM, se mata de manera ordena el proceso (lo envia docker por defecto para apagar contenedores)
+# Si se recibe SIGTERM, se mata de manera ordena el proceso (lo envía docker por defecto para apagar contenedores)
 # INT es SIGINT que sería el Ctrl+c
 trap "salir_bien" SIGTERM INT
 # Si hay un SIGQUIT se hace un exit. SIGQUIT tiene volcado de memoria
@@ -32,7 +32,7 @@ while true; do
     fi
     
     # Permiso total al propietario y de lectura al grupo
-    echo "Changing file permisions to 740"
+    echo "Cambiando permisos de fichero a 740"
     chmod -R 740 /etc/letsencrypt
     
     # Si existe la variable DORMIR, se espera es tiempo, y sino se sale
@@ -48,10 +48,10 @@ done &
 # Guardar el PID del proceso
 CERTBOOT_PID=$!
 
-# Se espera a que termine el proceso y recoge el codigo de salida
+# Se espera a que termine el proceso y recoge el código de salida
 wait -n "${CERTBOOT_PID}"
 EXIT_CODE=$?
 
 # Se sale
-echo "Saliendo con codigo de salida ${EXIT_CODE}"
+echo "Saliendo con código de salida ${EXIT_CODE}"
 exit "${EXIT_CODE}"
