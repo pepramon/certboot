@@ -36,7 +36,7 @@ while true; do
     chmod -R 740 /etc/letsencrypt
     
     # Si existe la variable DORMIR, se espera es tiempo, y sino se sale
-    if [ -n "$SLEEP" ]; then
+    if [ -n "$DORMIR" ]; then
         # Tiempo a dormir
         echo "Durmiendo durante ${DORMIR}"
         sleep $DORMIR
