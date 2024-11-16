@@ -11,13 +11,12 @@ on:
       - 'script_inicio.sh'
       
   schedule:
-    - cron: "*/5 * * * *"  # Ejecuta cada 5 min para pruebas
-#    - cron: "1 2 * * *"  # Ejecuta todos los días a las 02:1h
+#    - cron: "*/5 * * * *"  # Ejecuta cada 5 min para pruebas
+    - cron: "1 2 * * *"  # Ejecuta todos los días a las 02:1h
 
 jobs:
   "Actualización de imagen":
     runs-on: custom
-#    privileged: true
     env:
       IMAGEN_BASE: 'docker.io/certbot/certbot:latest'
       IMAGEN_DEST: 'docker.io/pepramon/certbot:latest'
