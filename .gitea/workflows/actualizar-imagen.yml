@@ -31,7 +31,7 @@ jobs:
           fi
 
       - name: Comprobando si imagen base ha cambiado
-#        if: env.construir != 'true'
+        if: env.construir != 'true'
         run: |
           echo "Realizando pull de las imagenes para comprobar si hay cambios"
           podman pull $IMAGEN_BASE
@@ -53,7 +53,7 @@ jobs:
           fi
           
       - name: Comprobar si hay actualizaciones de Alpine
-#        if: env.construir != 'true'
+        if: env.construir != 'true'
         run: |
           echo "Se hacen comprobaciones de actualizaciones de Alpine"
           
