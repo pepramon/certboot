@@ -3,6 +3,7 @@ FROM certbot/certbot:latest
 
 # CertBoot latest se basa en Alpine, se actualiza el sistema
 RUN apk update && \
+    apk  add --no-cache bash && \
     apk upgrade && \
     rm -rf /var/cache/apk/*
 

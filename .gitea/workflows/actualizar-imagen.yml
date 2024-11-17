@@ -58,7 +58,7 @@ jobs:
           echo "Se hacen comprobaciones de actualizaciones de Alpine"
           
           comando="apk update > /dev/null 2>&1 && apk list -u | wc -l"
-          paquetes_actualizar=$(podman run --entrypoint "" $IMAGEN_DEST "$comando")
+          paquetes_actualizar=$(podman run --entrypoint "" $IMAGEN_DEST bash -c "$comando")
           
           echo "Hay $paquetes_actualizar paquetes por actualizar de Alpine"
           
