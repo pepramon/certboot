@@ -5,13 +5,13 @@ on:
     branches:
       - main
       
-    # Solo se lanza la acción si cambia el Dockerfile
+    # No se lanza la acción si la actualización es del readme.md
     paths:
-      - 'Dockerfile'
-      - 'script_inicio.sh'
+      - '**/*'          # Todos los archivos del repositorio
+      - '!README.md'
       
   schedule:
-#    - cron: "*/5 * * * *"  # Ejecuta cada 5 min para pruebas
+    - cron: "*/5 * * * *"  # Ejecuta cada 5 min para pruebas
     - cron: "1 2 * * *"  # Ejecuta todos los días a las 02:1h
 
 jobs:
@@ -50,6 +50,23 @@ jobs:
           else
             echo "La imagen base ha cambiado. Hay que reconstruir la imagen derivada."
             echo "construir=true" >> $GITHUB_ENV
+          fi
+          
+      - name: Comprobar si hay actualizaciones de Alpine
+        if: env.construir != 'true'
+        run: |
+          echo "Se hacen comprobaciones de actualizaciones de Alpine"
+          
+          comando="apk update > /dev/null 2>&1 && apk list -u | wc -l"
+          paquetes_actualizar=$(podman run --entrypoint "" $IMAGEN_DEST bash -c "$comando")
+          
+          echo "Hay $paquetes_actualizar paquetes por actualizar de Alpine"
+          
+          if [ "$paquetes_actualizar" -gt 0 ]; then
+            echo "Actualizaciones disponibles en Alpine. Hay que construir imagen"
+            echo "construir=true" >> $GITHUB_ENV
+          else
+            echo "No hay actualizaciones disponibles en Alpine."
           fi
           
       - name: Checkout repositorio
