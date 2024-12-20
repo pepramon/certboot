@@ -5,7 +5,6 @@ salir_bien() {
     echo "Apagando CERTBOOT"
     if kill -0 "${CERTBOOT_PID}" 2>/dev/null; then
         kill -SIGTERM "${CERTBOOT_PID}"
-        wait "${CERTBOOT_PID}" || echo "CERTBOOT ya estaba detenido"
     fi
 }
 
