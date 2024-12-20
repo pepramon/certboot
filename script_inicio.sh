@@ -12,9 +12,7 @@ salir_bien() {
 # Si se reciben las señales 
 # Si se recibe SIGTERM, se mata de manera ordena el proceso (lo envía docker por defecto para apagar contenedores)
 # INT es SIGINT que sería el Ctrl+c
-trap "salir_bien" SIGTERM INT
-# Si hay un SIGQUIT se hace un exit. SIGQUIT tiene volcado de memoria
-trap "exit" QUIT
+trap "salir_bien" SIGTERM INT QUIT SIGQUIT
 
 while true; do
     certbot $@

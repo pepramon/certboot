@@ -1,6 +1,8 @@
 # Utilizamos la imagen oficial de certbot como base
 FROM certbot/certbot:latest
 
+STOPSIGNAL SIGTERM
+
 # CertBoot latest se basa en Alpine, se actualiza el sistema
 RUN apk update && \
     apk  add --no-cache bash && \
